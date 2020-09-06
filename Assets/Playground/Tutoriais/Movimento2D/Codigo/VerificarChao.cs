@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ public class VerificarChao : MonoBehaviour
 
     public bool EstaNoChao { get => estaNoChao; }
 
+    bool estadoAnterior;
+    public Action<bool> mudouEstado;
+
     private void Start()
     {
         myTransform = transform;
@@ -24,6 +28,11 @@ public class VerificarChao : MonoBehaviour
     void Update()
     {
         estaNoChao = (Physics2D.OverlapCircle((Vector2)myTransform.position, raio, layerDoChao) != null);
+        if (estadoAnterior != estaNoChao && mudouEstado != null)
+        {
+            mudouEstado(estaNoChao);
+            estadoAnterior = estaNoChao;
+        }
     }
 
     private void OnDrawGizmos()
