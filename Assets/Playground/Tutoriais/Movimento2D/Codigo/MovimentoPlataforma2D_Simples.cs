@@ -73,6 +73,10 @@ public class MovimentoPlataforma2D_Simples : MonoBehaviour, IMovimento
         {
             velocidadeFinal.x = velocidade * direcao.x;
         }
+        else
+        {
+            velocidadeFinal.x = 0;
+        }
     }
     #endregion
 
@@ -100,6 +104,7 @@ public class MovimentoPlataforma2D_Simples : MonoBehaviour, IMovimento
                 StopCoroutine(rotinaPulo);
                 break;
         }
+
         StopCoroutine(rotinaPulo);
     }
 

@@ -164,7 +164,7 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
         {
             velocidadeCorrigida.x = Mathf.Clamp(velocidadeCorrigida.x, -velocidade, velocidade);
         }
-
+        
         // verificar velocidade maxima de subida no pulo
         if (velocidadeCorrigida.y > velocidadePulo)
         {

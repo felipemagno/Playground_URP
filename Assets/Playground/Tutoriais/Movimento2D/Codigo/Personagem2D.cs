@@ -6,7 +6,8 @@ using UnityEngine;
 public class Personagem2D : MonoBehaviour
 {
     [SerializeField]
-    ETipoMovimento tipoMovimento = ETipoMovimento.Velocidade;
+    ETipoMovimentoPlataforma2D tipoMovimento = ETipoMovimentoPlataforma2D.Velocidade;
+    ETipoMovimentoPlataforma2D tipoMovimentoAnterior = ETipoMovimentoPlataforma2D.Velocidade;
 
     MovimentoPlataforma2D Movimento2D;
     MovimentoPlataforma2D_Simples Movimento2D_Simples;
@@ -21,7 +22,7 @@ public class Personagem2D : MonoBehaviour
     {
         Movimento2D = GetComponent<MovimentoPlataforma2D>();
         Movimento2D_Simples = GetComponent<MovimentoPlataforma2D_Simples>();
-        AlterarMovimento();
+        AlterarMovimento(true);
     }
 
     // Update is called once per frame
@@ -33,10 +34,10 @@ public class Personagem2D : MonoBehaviour
         // No Update, recebemos Inputs
         direcao.x = Input.GetAxisRaw("Horizontal");
         direcao.y = Input.GetAxisRaw("Vertical");
-
+        
         interfaceMovimento.Movimento(direcao);
 
-        if (Input.GetButtonDown("Jump"))// && myVerificarChao.EstaNoChao && estadoPulo == EPular.podePular)
+        if (Input.GetButtonDown("Jump"))
         {
             interfaceMovimento.IniciarPulo();
         }
@@ -47,20 +48,25 @@ public class Personagem2D : MonoBehaviour
     }
 
     // Modifica o script de movimento que está ativo
-    private void AlterarMovimento()
+    private void AlterarMovimento(bool forcar = false)
     {
-        switch (tipoMovimento)
-        {
-            case ETipoMovimento.Velocidade:
-                Movimento2D.enabled = false;
-                Movimento2D_Simples.enabled = true;
-                interfaceMovimento = Movimento2D_Simples;
-                break;
-            case ETipoMovimento.Forca:
-                Movimento2D.enabled = true;
-                Movimento2D_Simples.enabled = false;
-                interfaceMovimento = Movimento2D;
-                break;
+        if (forcar || tipoMovimentoAnterior != tipoMovimento)
+        {// se mandar forçar ou for diferente pode executar
+            switch (tipoMovimento)
+            {
+                case ETipoMovimentoPlataforma2D.Velocidade:
+                    Movimento2D.enabled = false;
+                    Movimento2D_Simples.enabled = true;
+                    interfaceMovimento = Movimento2D_Simples;
+                    break;
+                case ETipoMovimentoPlataforma2D.Forca:
+                    Movimento2D.enabled = true;
+                    Movimento2D_Simples.enabled = false;
+                    interfaceMovimento = Movimento2D;
+                    break;
+            }
+
+            tipoMovimentoAnterior = tipoMovimento; // atualize valor
         }
     }
 }

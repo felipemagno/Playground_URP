@@ -1,2 +1,1 @@
-﻿public enum ETipoMovimento { Velocidade, Forca }
-
+﻿public enum ETipoMovimentoPlataforma2D { Velocidade, Forca }
