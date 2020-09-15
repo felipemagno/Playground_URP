@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/URP_Template/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Playground/Licoes/CarregarFase/MenuInicial.unity
+    guid: 9988bec2a8f614947950b089e5c1c003
+  - enabled: 1
+    path: Assets/Playground/Tutoriais/Movimento2D/Movimento2D.unity
+    guid: 04fa7fad29bf26147ad77f2a2ae1f8a6
   m_configObjects: {}
