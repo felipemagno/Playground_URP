@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
 {
-    Transform myTransform;
-    Rigidbody2D myRigidbody2D;
-    VerificarChao myVerificarChao;
+    Transform _transform;
+    Rigidbody2D _rigidbody2D;
+    VerificarChao _verificarChao;
 
     private EPular estadoPulo = EPular.podePular;
 
@@ -34,20 +34,20 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
     Coroutine rotinaPulo;
     float gravidadeInicial;
 
-    public string meuPulo;
+    [SerializeField] private EPular meuPulo;
 
     public EPular EstadoPulo { get => estadoPulo; }
 
     private void Start()
     {
-        myTransform = transform;
+        _transform = transform;
         // "transform" na verdade é "GetComponent<Transform>()"
 
-        myRigidbody2D = GetComponent<Rigidbody2D>();
-        gravidadeInicial = myRigidbody2D.gravityScale;
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        gravidadeInicial = _rigidbody2D.gravityScale;
 
         //Procura pelo componente do tipo Script e de tipo "VerificarChao"
-        myVerificarChao = GetComponentInChildren<VerificarChao>();
+        _verificarChao = GetComponentInChildren<VerificarChao>();
     }
 
     private void FixedUpdate()
@@ -55,10 +55,10 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
         Mover();
         Pular();
 
-        meuPulo = estadoPulo.ToString();
+        meuPulo = estadoPulo;
 
         // Verifique os seus limites de velocidades e corrija
-        myRigidbody2D.velocity = VelocidadeCorrigida();
+        _rigidbody2D.velocity = VelocidadeCorrigida();
     }
 
     #region Movimento Horizontal
@@ -74,12 +74,12 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
         if (estaMovendo)
         {
             float forca = direcao.x * aceleracao;
-            if (!myVerificarChao.EstaNoChao)
+            if (!_verificarChao.EstaNoChao)
             {
                 forca *= controleNoAr;
             }
 
-            myRigidbody2D.AddForce(Vector2.right * forca, ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(Vector2.right * forca, ForceMode2D.Impulse);
         }
     }
 
@@ -89,7 +89,7 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
     // Tente dar o comando de iniciar o pulo
     public void IniciarPulo()
     {
-        if (myVerificarChao.EstaNoChao && estadoPulo == EPular.podePular)
+        if (_verificarChao.EstaNoChao && estadoPulo == EPular.podePular)
         {
             estadoPulo = EPular.pular;
         }
@@ -105,8 +105,7 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
                 break;
             case EPular.pulando:
                 estadoPulo = EPular.caindo;
-                myRigidbody2D.gravityScale = gravidadeInicial * multiplicadorQueda;
-                StopCoroutine(rotinaPulo);
+                _rigidbody2D.gravityScale = gravidadeInicial * multiplicadorQueda;
                 break;
         }
         StopCoroutine(rotinaPulo);
@@ -126,28 +125,28 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
         {
             // Verifique se começou a cair
             case EPular.podePular:
-                if (!myVerificarChao.EstaNoChao)
+                if (!_verificarChao.EstaNoChao)
                 {
                     estadoPulo = EPular.caindo;
-                    myRigidbody2D.gravityScale = gravidadeInicial * multiplicadorQueda;
+                    _rigidbody2D.gravityScale = gravidadeInicial * multiplicadorQueda;
                 }
                 break;
             // Inicie o pulo
             case EPular.pular:
-                myRigidbody2D.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
+                _rigidbody2D.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
                 rotinaPulo = StartCoroutine(TemporizadorPulo());
                 estadoPulo = EPular.pulando;
                 break;
             // Enquanto segurar botão de pulo, continue pulando
             case EPular.pulando:
-                myRigidbody2D.AddForce(Vector2.up * forcaPulo, ForceMode2D.Force);
+                _rigidbody2D.AddForce(Vector2.up * forcaPulo, ForceMode2D.Force);                
                 break;
             // Quando estiver caindo, verifique se encontrou o chão
             case EPular.caindo:
-                if (myVerificarChao.EstaNoChao)
+                if (_verificarChao.EstaNoChao)
                 {
                     estadoPulo = EPular.podePular;
-                    myRigidbody2D.gravityScale = gravidadeInicial;
+                    _rigidbody2D.gravityScale = gravidadeInicial;
                 }
                 break;
         }
@@ -157,7 +156,7 @@ public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
     #region Auxiliares
     private Vector2 VelocidadeCorrigida()
     {
-        Vector2 velocidadeCorrigida = myRigidbody2D.velocity;
+        Vector2 velocidadeCorrigida = _rigidbody2D.velocity;
 
         // verificar velocidade maxima horizontal
         if (Mathf.Abs(velocidadeCorrigida.x) > velocidade)
