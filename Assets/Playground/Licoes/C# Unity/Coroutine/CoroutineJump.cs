@@ -28,7 +28,10 @@ public class CoroutineJump : MonoBehaviour
         {
             if (flipFlop)
             {
-                StopCoroutine(_coroutine);
+                if (_coroutine != null)
+                {
+                    StopCoroutine(_coroutine);
+                }
                 //StopCoroutine("Jump");
             }
             else
