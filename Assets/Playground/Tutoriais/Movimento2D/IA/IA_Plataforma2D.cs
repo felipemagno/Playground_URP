@@ -12,15 +12,15 @@ public class IA_Plataforma2D : MonoBehaviour
 
     bool olhandoParaDireita = true;
     [Header("Deteccao de Obstaculos e Buracos")]
-    [SerializeField] LayerMask obstaculos;
-    [SerializeField] LayerMask chao;
     [SerializeField] bool debug = true;
 
     [Header("Detectar Obstaculos no Caminho")]
+    [SerializeField] LayerMask obstaculos;
     [SerializeField] float offsetObstaculo = 0.5f;
     [SerializeField] float raioObstaculo = 0.5f;
 
     [Header("Detectar Chao")]
+    [SerializeField] LayerMask chao;
     [SerializeField] float offsetChao = 0.5f;
     [SerializeField] float raioChao = 0.5f;
 
