@@ -289,6 +289,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &222360090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 222360091}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &222360091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222360090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.220184, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 570241265}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &570241265 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7252415403752039456, guid: 4d1952987fed6974bb66a8ad573a0eed, type: 3}
+  m_PrefabInstance: {fileID: 837005431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &683392739
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +408,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 732763910013230736, guid: 4d1952987fed6974bb66a8ad573a0eed, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0014822483
+      objectReference: {fileID: 0}
+    - target: {fileID: 732763910013230736, guid: 4d1952987fed6974bb66a8ad573a0eed, type: 3}
+      propertyPath: m_Size.x
+      value: 0.99713564
+      objectReference: {fileID: 0}
     - target: {fileID: 4648273575007762181, guid: 4d1952987fed6974bb66a8ad573a0eed, type: 3}
       propertyPath: m_Name
       value: IA_Plataforma2D

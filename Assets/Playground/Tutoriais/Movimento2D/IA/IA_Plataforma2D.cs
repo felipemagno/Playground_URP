@@ -8,7 +8,7 @@ public class IA_Plataforma2D : MonoBehaviour
     IMovimento _movimento;
     Transform _transform;
     Collider2D _collider;
-    Bounds _bounds;
+    Bounds _bounds => _collider.bounds;
 
     bool olhandoParaDireita = true;
     [Header("Deteccao de Obstaculos e Buracos")]
@@ -38,10 +38,6 @@ public class IA_Plataforma2D : MonoBehaviour
         if (_collider == null)
         {
             Debug.LogError("ERRO: IA sem Colisor!");
-        }
-        else
-        {
-            _bounds = _collider.bounds;
         }
 
         _transform = transform;
@@ -79,7 +75,7 @@ public class IA_Plataforma2D : MonoBehaviour
         offsetOrigem = new Vector2(_bounds.extents.x + offsetChao, 0);
         offsetOrigem = olhandoParaDireita ? offsetOrigem : -offsetOrigem;
 
-        origem = (Vector2)_transform.position + offsetOrigem;
+        origem = (Vector2)_bounds.center + offsetOrigem;
         direcao = Vector2.down;
         raio = _bounds.extents.y + raioChao;
 
@@ -99,7 +95,7 @@ public class IA_Plataforma2D : MonoBehaviour
         offsetOrigem = new Vector2(_bounds.extents.x + offsetObstaculo, 0);
         offsetOrigem = olhandoParaDireita ? offsetOrigem : -offsetOrigem;
 
-        origem = (Vector2)_transform.position + offsetOrigem;
+        origem = (Vector2)_bounds.center + offsetOrigem;
         direcao = olhandoParaDireita ? Vector2.right : Vector2.left;
         raio = raioObstaculo;
 
@@ -122,20 +118,19 @@ public class IA_Plataforma2D : MonoBehaviour
     private void OnDrawGizmos()
     {
 #if UNITY_EDITOR
-        _bounds = GetComponent<Collider2D>().bounds;
+        _collider = GetComponent<Collider2D>();
         _transform = transform;
 
         Vector2 origem;
         Vector2 offsetOrigem;
         Vector2 direcao;
         float raio;
-        RaycastHit2D hit;
 
         // Verificar chão afrente
         offsetOrigem = new Vector2(_bounds.extents.x + offsetChao, 0);
         offsetOrigem = olhandoParaDireita ? offsetOrigem : -offsetOrigem;
 
-        origem = (Vector2)_transform.position + offsetOrigem;
+        origem = (Vector2)_bounds.center + offsetOrigem;
         direcao = Vector2.down;
         raio = _bounds.extents.y + raioChao;
 
@@ -145,7 +140,7 @@ public class IA_Plataforma2D : MonoBehaviour
         offsetOrigem = new Vector2(_bounds.extents.x + offsetObstaculo, 0);
         offsetOrigem = olhandoParaDireita ? offsetOrigem : -offsetOrigem;
 
-        origem = (Vector2)_transform.position + offsetOrigem;
+        origem = (Vector2)_bounds.center + offsetOrigem;
         direcao = olhandoParaDireita ? Vector2.right : Vector2.left;
         raio = raioObstaculo;
 
