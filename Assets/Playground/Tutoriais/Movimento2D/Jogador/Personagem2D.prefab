@@ -11,11 +11,13 @@ GameObject:
   - component: {fileID: 5275287453767692413}
   - component: {fileID: 5275287453767692414}
   - component: {fileID: 5275287453767692412}
-  - component: {fileID: 5275287453767692411}
   - component: {fileID: 5275287453767692410}
   - component: {fileID: 5275287453767692409}
   - component: {fileID: 5275287453767692408}
-  m_Layer: 0
+  - component: {fileID: 1178952571}
+  - component: {fileID: 1178952567}
+  - component: {fileID: 1178952572}
+  m_Layer: 9
   m_Name: Personagem2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 5275287453767692415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.46, y: 4.96, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 5275287453943892633}
   m_Father: {fileID: 0}
@@ -77,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -2035214071
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5485e2f56028a3c4cb54f5caa167377e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b67bcdceafe4a1e4fb1f17250c8a136f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,22 +111,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &5275287453767692411
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5275287453767692415}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.28
 --- !u!114 &5275287453767692410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +143,8 @@ MonoBehaviour:
   forcaPulo: 350
   duracaoPulo: 0.3
   multiplicadorQueda: 2
-  meuPulo: 
+  DuracaoCoyote: 0.2
+  meuPulo: 0
 --- !u!114 &5275287453767692408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +162,53 @@ MonoBehaviour:
   duracaoPulo: 0.3
   multiplicadorQueda: 2
   meuPulo: podePular
+--- !u!70 &1178952571
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275287453767692415}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.05685997}
+  m_Size: {x: 0.23759842, y: 0.78442657}
+  m_Direction: 0
+--- !u!95 &1178952567
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275287453767692415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3318ff8be619b374eb053733cb2be9bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1178952572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275287453767692415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9caeeff652251f540b087379b1c74602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5275287453943892634
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5275287453943892633}
   - component: {fileID: 5275287453943892632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VerificarChao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5275287453943892634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: -1.29, z: 0}
+  m_LocalPosition: {x: 0, y: -0.444, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5275287453767692413}
@@ -218,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc9c8e9168d0c04b8c310b8aa567830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raio: 0.25
+  raio: 0.15
   layerDoChao:
     serializedVersion: 2
     m_Bits: 256

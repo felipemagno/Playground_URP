@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AnimacaoPlataforma2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class MovimentoPlataforma2D : MonoBehaviour, IMovimento
 {
     Transform _transform;
