@@ -9,6 +9,8 @@ public class Personagem2D : MonoBehaviour
     ETipoMovimentoPlataforma2D tipoMovimento = ETipoMovimentoPlataforma2D.Velocidade;
     ETipoMovimentoPlataforma2D tipoMovimentoAnterior = ETipoMovimentoPlataforma2D.Velocidade;
 
+    [SerializeField] Vida _vida;
+
     MovimentoPlataforma2D Movimento2D;
     MovimentoPlataforma2D_Simples Movimento2D_Simples;
 
@@ -23,8 +25,26 @@ public class Personagem2D : MonoBehaviour
         Movimento2D = GetComponent<MovimentoPlataforma2D>();
         Movimento2D_Simples = GetComponent<MovimentoPlataforma2D_Simples>();
         AlterarMovimento(true);
+
+        
     }
 
+    private void OnEnable()
+    {
+        if (_vida)
+        {
+            _vida.Morreu += Renascer;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_vida)
+        {
+            _vida.Morreu -= Renascer;
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -68,5 +88,12 @@ public class Personagem2D : MonoBehaviour
 
             tipoMovimentoAnterior = tipoMovimento; // atualize valor
         }
+    }
+
+    private void Renascer()
+    {
+        print("Personagem Renasceu");
+        Transform posicao = GameManager_Plat2D.instance?.GetRespawnPosition();
+        transform.position = posicao.position;
     }
 }

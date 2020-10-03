@@ -6,11 +6,14 @@ using UnityEngine;
 public class IA_Plataforma2D : MonoBehaviour
 {
     IMovimento _movimento;
-    Transform _transform;
     Collider2D _collider;
     Bounds _bounds => _collider.bounds;
 
     bool olhandoParaDireita = true;
+    [Header("Arma da IA")]
+    [SerializeField] Dano arma;
+    [SerializeField] float offSetArma = 0.2f;
+
     [Header("Deteccao de Obstaculos e Buracos")]
     [SerializeField] bool debug = true;
 
@@ -40,7 +43,8 @@ public class IA_Plataforma2D : MonoBehaviour
             Debug.LogError("ERRO: IA sem Colisor!");
         }
 
-        _transform = transform;
+        Vector3 offsetOrigem = new Vector3(_bounds.extents.x + offSetArma, 0,0);        
+        arma.transform.position = _bounds.center + offsetOrigem;
     }
 
     // Update is called once per frame
@@ -51,6 +55,11 @@ public class IA_Plataforma2D : MonoBehaviour
         if (MudarDirecao())
         {
             olhandoParaDireita = !olhandoParaDireita;
+
+            // Mudar posição da arma de dano
+            Vector3 offsetOrigem = new Vector3(_bounds.extents.x + offSetArma, 0, 0);
+            offsetOrigem = olhandoParaDireita ? offsetOrigem : -offsetOrigem;
+            arma.transform.position = _bounds.center + offsetOrigem;
         }
 
         if (olhandoParaDireita)
@@ -117,9 +126,7 @@ public class IA_Plataforma2D : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-#if UNITY_EDITOR
         _collider = GetComponent<Collider2D>();
-        _transform = transform;
 
         Vector2 origem;
         Vector2 offsetOrigem;
@@ -145,6 +152,6 @@ public class IA_Plataforma2D : MonoBehaviour
         raio = raioObstaculo;
 
         Gizmos.DrawRay(origem, direcao * raio);
-#endif
+
     }
 }
