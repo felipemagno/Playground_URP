@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager_Plat2D : MonoBehaviour
 {
-    public static GameManager_Plat2D instance;
+    public static GameManager_Plat2D instance; // Padrão Singleton
     private Checkpoint checkpointAtual;
 
     private void Awake()
@@ -49,7 +49,10 @@ public class GameManager_Plat2D : MonoBehaviour
     {
         if (checkpoint != checkpointAtual)
         {
-            checkpointAtual = checkpoint;
+            checkpointAtual?.DeactivateCheckpoint();
+            checkpoint.ActivateCheckpoint();
+
+            checkpointAtual = checkpoint;            
             return true;
         }
         else

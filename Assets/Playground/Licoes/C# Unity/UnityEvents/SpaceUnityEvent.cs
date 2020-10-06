@@ -6,9 +6,7 @@ using UnityEngine.Events;
 public class SpaceUnityEvent : MonoBehaviour
 {
     [SerializeField] UnityEvent spaceEvent;
-
     
-
     // Update is called once per frame
     void Update()
     {

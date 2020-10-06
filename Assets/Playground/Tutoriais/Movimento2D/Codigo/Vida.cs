@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Vida : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class Vida : MonoBehaviour
     public event Action<float> Machucou;
     public event Action Morreu;
 
+    CinemachineImpulseSource impulseSource;
+
     private void Start()
     {
         Machucou += TesteDano;
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public void LevarDano(float valor)
@@ -37,6 +41,7 @@ public class Vida : MonoBehaviour
     private void TesteDano(float valor)
     {
         print("Machucou muito, foi desse tamanho oh! " + valor);
+        impulseSource?.GenerateImpulse(2);
     }
 
 

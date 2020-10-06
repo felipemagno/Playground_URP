@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Personagem2D : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class Personagem2D : MonoBehaviour
 
     IMovimento interfaceMovimento;
 
+    [Header("Extras")]
+    [SerializeField] CinemachineImpulseSource impulseSource;
+    [SerializeField] float impulseForce = 5f;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
+
     // Inputs
     private Vector2 direcao;
 
@@ -25,8 +31,6 @@ public class Personagem2D : MonoBehaviour
         Movimento2D = GetComponent<MovimentoPlataforma2D>();
         Movimento2D_Simples = GetComponent<MovimentoPlataforma2D_Simples>();
         AlterarMovimento(true);
-
-        
     }
 
     private void OnEnable()
@@ -44,7 +48,7 @@ public class Personagem2D : MonoBehaviour
             _vida.Morreu -= Renascer;
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -54,7 +58,7 @@ public class Personagem2D : MonoBehaviour
         // No Update, recebemos Inputs
         direcao.x = Input.GetAxisRaw("Horizontal");
         direcao.y = Input.GetAxisRaw("Vertical");
-        
+
         interfaceMovimento.Movimento(direcao);
 
         if (Input.GetButtonDown("Jump"))
@@ -95,5 +99,10 @@ public class Personagem2D : MonoBehaviour
         print("Personagem Renasceu");
         Transform posicao = GameManager_Plat2D.instance?.GetRespawnPosition();
         transform.position = posicao.position;
+        
+        if (impulseSource)
+        {
+            impulseSource.GenerateImpulse(impulseForce);
+        }
     }
 }

@@ -126,6 +126,7 @@ public class IA_Plataforma2D : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        return;
         _collider = GetComponent<Collider2D>();
 
         Vector2 origem;
