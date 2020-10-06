@@ -11,6 +11,7 @@ public class IniciarCor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // MinhasCores = ScriptableObject.CreateInstance<SO_Config>();
         _renderizador = GetComponent<Renderer>();
         _renderizador.material.color = MinhasCores.GetRandomColor();
     }

@@ -63,6 +63,7 @@ public class Personagem2D : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
+            print("jump");
             interfaceMovimento.IniciarPulo();
         }
         else if (Input.GetButtonUp("Jump"))

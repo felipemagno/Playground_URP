@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ExemploCor : MonoBehaviour
 {
-    Renderer renderer;
+    Renderer _renderer;
     public SpaceDelegate spaceDelegate;
          
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
         if (spaceDelegate)
         {
             //spaceDelegate.delegateEvent += MudarCor;
@@ -61,7 +61,7 @@ public class ExemploCor : MonoBehaviour
 
     public void MudarCor()
     {
-        renderer.material.color = Random.ColorHSV();
+        _renderer.material.color = Random.ColorHSV();
     }
 
     #region Exemplos com Delegate
